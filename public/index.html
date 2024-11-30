@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Checklist Evaluation</h1>
+  <table id="results">
+    <thead>
+      <tr>
+        <th>Condition</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    async function loadResults() {
+      const response = await fetch("/api/checklist");
+      const data = await response.json();
+
+      const tableBody = document.querySelector("#results tbody");
+      tableBody.innerHTML = "";
+
+      data.forEach((rule) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${rule.description}</td>
+          <td>${rule.passed ? "Passed" : "Failed"}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    loadResults();
+  </script>
+</body>
+</html>
