@@ -20,7 +20,7 @@
 
   <script>
     async function loadResults() {
-      const response = await fetch("simple-checklist-system.vercel.app/api/checklist");
+      const response = await fetch("https://simple-checklist-system.vercel.app/api/checklist");
       const data = await response.json();
 
       const tableBody = document.querySelector("#results tbody");
